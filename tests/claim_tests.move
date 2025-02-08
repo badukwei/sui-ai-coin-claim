@@ -29,8 +29,9 @@ module claim::claim_tests {
         let name = metadata.get_name<CLAIM_TESTS>();
         let description = metadata.get_description<CLAIM_TESTS>();
         let icon_url = url::inner_url(metadata.get_icon_url<CLAIM_TESTS>().borrow()).to_string();
+        let ca = metadata.get_symbol<CLAIM_TESTS>().to_string();
 
-        claim::create(treasury, name, symbol, description, icon_url, TEST_ADDR, scenario.ctx());
+        claim::create(treasury, ca, name, symbol, description, icon_url, TEST_ADDR, scenario.ctx());
         scenario.next_epoch(TEST_ADDR);
         let coin = scenario.take_from_address<Coin<CLAIM_TESTS>>(TEST_ADDR);
         let value = coin.value();

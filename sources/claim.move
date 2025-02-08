@@ -6,10 +6,9 @@ module claim::claim {
     // Constants
     const AMOUNT: u64 = 1000000000;
 
-    // Errors 
-
     // Events
     public struct Event has copy, drop, store {
+        ca: String,
         name: String,
         symbol: String,
         description: String,
@@ -18,6 +17,7 @@ module claim::claim {
 
     public fun create<T>(
         treasury: TreasuryCap<T>,
+        ca: String,
         name: String,
         symbol: String,
         description: String,
@@ -28,6 +28,7 @@ module claim::claim {
         let mut treasury_mut = treasury;
         coin::mint_and_transfer(&mut treasury_mut, AMOUNT, recipient, ctx);
         let _event = Event{
+            ca: ca,
             name: name,
             symbol: symbol,
             description,
